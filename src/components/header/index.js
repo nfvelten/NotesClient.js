@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Navbar, Column,Container } from "rbx";
+import { Navbar, Column, Container } from "rbx";
 import LogoImage from "../../assets/images/logo.png";
 import "../../styles/header.scss";
 import { Link } from "react-router-dom";
+// import { faList } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function Header() {
+function Header(props) {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
@@ -38,10 +40,36 @@ function Header() {
           >
             <Column.Group>
               <Column>
-                <Link to="/register" className="button is-white has-text-custom-purple">Register</Link>
+                <Link
+                  to="/notes"
+                  className="button is-white has-text-custom-purple"
+                >
+                  Notes
+                </Link>
               </Column>
               <Column>
-                <Link to="/login" className="button is-outlined is-custom-purple">Login</Link>
+                <Link
+                  to="/users/edit"
+                  className="button is-white has-text-custom-purple"
+                >
+                  Edit account
+                </Link>
+              </Column>
+              <Column>
+                <Link
+                  to="/register"
+                  className="button is-white has-text-custom-purple"
+                >
+                  Register
+                </Link>
+              </Column>
+              <Column>
+                <Link
+                  to="/login"
+                  className="button is-outlined is-custom-purple"
+                >
+                  Login
+                </Link>
               </Column>
             </Column.Group>
           </Navbar.Segment>

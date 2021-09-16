@@ -1,0 +1,35 @@
+@import "./custom_colors.scss";
+
+.notes {
+  height: calc(100% - 70px);
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  .list-item.is-active {
+    background-color: #e4e4e4;
+  }
+}
+.bm-menu {
+  background: white;
+  padding-top: 10px;
+}
+
+nav.navbar {
+  height: 70px;
+  border-bottom: 1px solid black;
+  background-color: $custom-purple-lighter;
+  .navbar-brand {
+    img {
+      height: 40px;
+      margin-top: 15px;
+    }
+  }
+}
+
+.notes-editor {
+  padding: 0;
+  height: calc(100% - 43px);
+  .quill {
+    height: 100%;
+  }
+}

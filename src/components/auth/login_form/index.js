@@ -3,29 +3,26 @@ import { Button, Field, Control, Input, Column, Help, Label } from "rbx";
 import { Redirect } from "react-router-dom";
 import UserService from "../../../services/users";
 
-function RegisterForm() {
-  const [name, setName] = useState("");
+function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [redirectToLogin, setRedirectToLogin] = useState(false);
+  const [RedirectToRegister, setRedirectToRegister] = useState(false);
+  const [RedirectToNotes, setRedirectToNotes] = useState(false);
   const [error, setError] = useState(false);
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
     try {
-      const user = await UserService.register({
-        name: name,
-        email: email,
-        password: password,
-      });
-      setRedirectToLogin(true);
+      await UserService.login({ email: email, password: password });
+      setRedirectToNotes(true);
     } catch (error) {
       setError(true);
     }
   };
 
-  if (redirectToLogin === true) return <Redirect to={{ pathname: "/login" }} />;
+  if (RedirectToRegister) return <Redirect to={{ pathname: "/register" }} />;
+  else if (RedirectToNotes) return <Redirect to={{ pathname: "/notes" }} />;
 
   return (
     <Fragment>
@@ -33,26 +30,14 @@ function RegisterForm() {
         <form onSubmit={handleSubmit}>
           <Column size={12}>
             <Field>
-              <Label size="small">Name:</Label>
-              <Control>
-                <Input
-                  value={name}
-                  type="name"
-                  required
-                  name="name"
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </Control>
-            </Field>
-            <Field>
               <Label size="small">Email:</Label>
               <Control>
                 <Input
                   value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   required
                   name="email"
-                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Control>
             </Field>
@@ -61,10 +46,10 @@ function RegisterForm() {
               <Control>
                 <Input
                   value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   required
                   name="password"
-                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Control>
             </Field>
@@ -73,16 +58,16 @@ function RegisterForm() {
                 <Column.Group breakpoint="mobile">
                   <Column>
                     <a
-                      onClick={() => setRedirectToLogin(true)}
-                      href="/Login"
+                      href="/register"
+                      onClick={(e) => setRedirectToRegister(true)}
                       className="button is-white has-text-custom-purple"
                     >
-                      Login or
+                      Register or
                     </a>
                   </Column>
                   <Column>
                     <Button color="custom-purple" outlined>
-                      Register
+                      Login
                     </Button>
                   </Column>
                 </Column.Group>
@@ -96,4 +81,4 @@ function RegisterForm() {
   );
 }
 
-export default RegisterForm;
+export default LoginForm;

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const HomeScreen = () => {
   return (
     <Fragment>
-      <Header />
+      <Header backgroundColor='white' />
 
       <Section size="medium" className="home">
         <Container>
